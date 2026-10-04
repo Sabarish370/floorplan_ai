@@ -1,0 +1,1674 @@
+{
+  "generated_at": "2026-10-04 16:09:32",
+  "total_cases": 26,
+  "summary": {
+    "valid": 11,
+    "retryable_failure": 0,
+    "infeasible_request": 15,
+    "failed": 0,
+    "invalid_plans_rendered": 0,
+    "total_duration_seconds": 220.38
+  },
+  "procedural_comparison": {
+    "TC1": {
+      "agentic_status": "VALID",
+      "agentic_valid": true,
+      "procedural_status": "PASS",
+      "procedural_valid": true
+    },
+    "TC2": {
+      "agentic_status": "VALID",
+      "agentic_valid": true,
+      "procedural_status": "PASS",
+      "procedural_valid": true
+    },
+    "TC3": {
+      "agentic_status": "VALID",
+      "agentic_valid": true,
+      "procedural_status": "PASS",
+      "procedural_valid": true
+    },
+    "TC4": {
+      "agentic_status": "VALID",
+      "agentic_valid": true,
+      "procedural_status": "PASS",
+      "procedural_valid": true
+    },
+    "Plot-25x40": {
+      "agentic_status": "INFEASIBLE_REQUEST",
+      "agentic_valid": false,
+      "procedural_status": "FAIL",
+      "procedural_valid": false
+    },
+    "Parking-No": {
+      "agentic_status": "VALID",
+      "agentic_valid": true,
+      "procedural_status": "PASS",
+      "procedural_valid": true
+    }
+  },
+  "cases": [
+    {
+      "case_id": "TC1",
+      "category": "baseline",
+      "description": "Standard 30x40 West 2BHK+Pooja baseline",
+      "input": {
+        "plot_width": 30,
+        "plot_depth": 40,
+        "facing": "west",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 8.85
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 69.0,
+        "compactness": null,
+        "vastu_score": 32,
+        "architecture_score": 93.8,
+        "final_score": 32
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "TC2",
+      "category": "baseline",
+      "description": "Standard 40x50 East 3BHK baseline",
+      "input": {
+        "plot_width": 40,
+        "plot_depth": 50,
+        "facing": "east",
+        "parking": true,
+        "bedrooms": 3,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 0,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 5.94
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 64.3,
+        "compactness": null,
+        "vastu_score": 75,
+        "architecture_score": 96.0,
+        "final_score": 75
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "TC3",
+      "category": "baseline",
+      "description": "Standard 30x50 North 2BHK+2Kit baseline",
+      "input": {
+        "plot_width": 30,
+        "plot_depth": 50,
+        "facing": "north",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 2,
+        "bathrooms": 1,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 5.64
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 72.5,
+        "compactness": null,
+        "vastu_score": 41,
+        "architecture_score": 85.2,
+        "final_score": 41
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "TC4",
+      "category": "baseline",
+      "description": "Standard 30x40 West 1BHK baseline",
+      "input": {
+        "plot_width": 30,
+        "plot_depth": 40,
+        "facing": "west",
+        "parking": true,
+        "bedrooms": 1,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 1,
+        "pooja": 0,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 2.35
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 60.3,
+        "compactness": null,
+        "vastu_score": 29,
+        "architecture_score": 100.0,
+        "final_score": 29
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Plot-20x30",
+      "category": "plot_size",
+      "description": "Plot-size sensitivity: 20x30 (600 sq.ft) with 2BHK+Pooja",
+      "input": {
+        "plot_width": 20,
+        "plot_depth": 30,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 1,
+        "retry_recommended": false,
+        "dominant_issue": "AREA_CAPACITY_EXCEEDED",
+        "affected_rooms": [
+          "bedroom",
+          "hall",
+          "kitchen",
+          "bathroom",
+          "pooja"
+        ],
+        "diagnosis_reason": "Total minimum room area (636 sq.ft) exceeds plot area (600.0 sq.ft).",
+        "infeasibility_reasons": [
+          "Total minimum required area (636 sq.ft) exceeds available plot area (600.0 sq.ft)."
+        ],
+        "recommended_relaxations": [
+          "Increase plot dimensions",
+          "Reduce number of requested rooms",
+          "Modify or remove parking requirement"
+        ],
+        "duration_seconds": 0.15
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 0,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 36.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 100.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": true,
+        "final_valid": false,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Plot-25x40",
+      "category": "plot_size",
+      "description": "Plot-size sensitivity: 25x40 South stress baseline",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.32
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Plot-30x40",
+      "category": "plot_size",
+      "description": "Plot-size sensitivity: 30x40 South",
+      "input": {
+        "plot_width": 30,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 2.01
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 67.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 84.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1",
+          "bathroom_2"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Plot-30x50",
+      "category": "plot_size",
+      "description": "Plot-size sensitivity: 30x50 South",
+      "input": {
+        "plot_width": 30,
+        "plot_depth": 50,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_2",
+          "kitchen_1",
+          "pooja_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_2, kitchen_1, pooja_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_2, kitchen_1, pooja_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 4.75
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 64.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 85.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "kitchen_1",
+          "bathroom_2",
+          "pooja_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Plot-40x50",
+      "category": "plot_size",
+      "description": "Plot-size sensitivity: 40x50 South",
+      "input": {
+        "plot_width": 40,
+        "plot_depth": 50,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 10.0
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 67.6,
+        "compactness": null,
+        "vastu_score": 39,
+        "architecture_score": 92.8,
+        "final_score": 39
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Plot-40x60",
+      "category": "plot_size",
+      "description": "Plot-size sensitivity: 40x60 South",
+      "input": {
+        "plot_width": 40,
+        "plot_depth": 60,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 14.27
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 58.3,
+        "compactness": null,
+        "vastu_score": 40,
+        "architecture_score": 93.8,
+        "final_score": 40
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Plot-50x60",
+      "category": "plot_size",
+      "description": "Plot-size sensitivity: 50x60 South",
+      "input": {
+        "plot_width": 50,
+        "plot_depth": 60,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 10.39
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 59.6,
+        "compactness": null,
+        "vastu_score": 41,
+        "architecture_score": 93.8,
+        "final_score": 41
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Parking-Yes",
+      "category": "parking_sensitivity",
+      "description": "Parking sensitivity: 25x40 South with Parking",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.22
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Parking-No",
+      "category": "parking_sensitivity",
+      "description": "Parking sensitivity: 25x40 South WITHOUT Parking",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": false,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 7.47
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 78.9,
+        "compactness": null,
+        "vastu_score": 6,
+        "architecture_score": 96.0,
+        "final_score": 6
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Room-2B1K2B1P",
+      "category": "room_count_sensitivity",
+      "description": "Room count: 2 Bed, 1 Kit, 2 Bath, 1 Pooja (reference)",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.2
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Room-1B1K2B1P",
+      "category": "room_count_sensitivity",
+      "description": "Room count: 1 Bed, 1 Kit, 2 Bath, 1 Pooja",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 1,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_2",
+          "kitchen_1",
+          "pooja_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_2, kitchen_1, pooja_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_2, kitchen_1, pooja_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.12
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 60.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 85.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "kitchen_1",
+          "bathroom_2",
+          "pooja_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Room-2B1K2B0P",
+      "category": "room_count_sensitivity",
+      "description": "Room count: 2 Bed, 1 Kit, 2 Bath, 0 Pooja",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 0,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.02
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Room-1B1K1B0P",
+      "category": "room_count_sensitivity",
+      "description": "Room count: 1 Bed, 1 Kit, 1 Bath, 0 Pooja",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 1,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 1,
+        "pooja": 0,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 0.71
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 51.6,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 93.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "kitchen_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Facing-South",
+      "category": "facing_sensitivity",
+      "description": "Facing sensitivity: South facing",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.21
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Facing-North",
+      "category": "facing_sensitivity",
+      "description": "Facing sensitivity: North facing",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "north",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.21
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Facing-East",
+      "category": "facing_sensitivity",
+      "description": "Facing sensitivity: East facing",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "east",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 2.19
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 55.2,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 92.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Facing-West",
+      "category": "facing_sensitivity",
+      "description": "Facing sensitivity: West facing",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "west",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 5.32
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 76.6,
+        "compactness": null,
+        "vastu_score": 0,
+        "architecture_score": 97.0,
+        "final_score": 0
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Vastu-ON",
+      "category": "vastu_sensitivity",
+      "description": "Vastu sensitivity: Vastu ON",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.21
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Vastu-OFF",
+      "category": "vastu_sensitivity",
+      "description": "Vastu sensitivity: Vastu OFF (geometry-only evaluation)",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": false,
+        "vastu_optimization": false
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.21
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    },
+    {
+      "case_id": "Repeat-TC1",
+      "category": "repeatability",
+      "description": "Repeatability: TC1 second run",
+      "input": {
+        "plot_width": 30,
+        "plot_depth": 40,
+        "facing": "west",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 7.95
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 69.0,
+        "compactness": null,
+        "vastu_score": 32,
+        "architecture_score": 93.8,
+        "final_score": 32
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Repeat-TC2",
+      "category": "repeatability",
+      "description": "Repeatability: TC2 second run",
+      "input": {
+        "plot_width": 40,
+        "plot_depth": 50,
+        "facing": "east",
+        "parking": true,
+        "bedrooms": 3,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 0,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 6.05
+      },
+      "metrics": {
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 64.3,
+        "compactness": null,
+        "vastu_score": 75,
+        "architecture_score": 96.0,
+        "final_score": 75
+      },
+      "validation": {
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
+        "passage_violations": [],
+        "door_infeasible": false,
+        "room_count_valid": true
+      }
+    },
+    {
+      "case_id": "Repeat-25x40-South",
+      "category": "repeatability",
+      "description": "Repeatability: 25x40 South stress second run",
+      "input": {
+        "plot_width": 25,
+        "plot_depth": 40,
+        "facing": "south",
+        "parking": true,
+        "bedrooms": 2,
+        "hall": 1,
+        "kitchens": 1,
+        "bathrooms": 2,
+        "pooja": 1,
+        "vastu_enabled": true,
+        "vastu_optimization": true
+      },
+      "result": {
+        "orchestration_status": "INFEASIBLE_REQUEST",
+        "failure_classification": "INFEASIBLE_REQUEST",
+        "valid": false,
+        "rendered": false,
+        "attempted_iterations": 2,
+        "retry_recommended": false,
+        "dominant_issue": "DISCONNECTED_ROOM",
+        "affected_rooms": [
+          "bathroom_1",
+          "bedroom_2",
+          "kitchen_1"
+        ],
+        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
+        "infeasibility_reasons": [
+          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
+          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
+          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
+        ],
+        "recommended_relaxations": [
+          "Increase plot size (width or depth) to provide additional access perimeter",
+          "Reduce the number of requested rooms",
+          "Modify or remove parking requirement to free frontage for room connectivity",
+          "Relax architectural direct-access constraints if permissible"
+        ],
+        "duration_seconds": 1.19
+      },
+      "metrics": {
+        "complete_candidates": 0,
+        "geometry_valid_candidates": 2,
+        "connectivity_valid_candidates": 0,
+        "circulation_valid_candidates": 0,
+        "door_feasible_candidates": 0,
+        "space_utilization": 66.0,
+        "compactness": null,
+        "vastu_score": null,
+        "architecture_score": 88.0,
+        "final_score": null
+      },
+      "validation": {
+        "geometry_valid": false,
+        "circulation_valid": false,
+        "final_valid": false,
+        "unreachable_rooms": [
+          "bedroom_2",
+          "kitchen_1",
+          "bathroom_1"
+        ],
+        "passage_violations": [],
+        "door_infeasible": true,
+        "room_count_valid": false
+      }
+    }
+  ]
+}

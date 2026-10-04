@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+history/
+*.log
+*.txt
+!requirements.txt
+*.svg
+debug.json
+/test_*.py
+!/test_cases.py
+
+
