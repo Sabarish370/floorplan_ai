@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-04 16:09:32",
+  "generated_at": "2026-10-04 16:51:32",
   "total_cases": 26,
   "summary": {
-    "valid": 11,
+    "valid": 12,
     "retryable_failure": 0,
-    "infeasible_request": 15,
+    "infeasible_request": 14,
     "failed": 0,
     "invalid_plans_rendered": 0,
-    "total_duration_seconds": 220.38
+    "total_duration_seconds": 219.89
   },
   "procedural_comparison": {
     "TC1": {
@@ -77,7 +77,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 8.85
+        "duration_seconds": 8.09
       },
       "metrics": {
         "complete_candidates": null,
@@ -130,7 +130,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 5.94
+        "duration_seconds": 6.31
       },
       "metrics": {
         "complete_candidates": null,
@@ -183,7 +183,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 5.64
+        "duration_seconds": 5.15
       },
       "metrics": {
         "complete_candidates": null,
@@ -236,7 +236,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 2.35
+        "duration_seconds": 1.78
       },
       "metrics": {
         "complete_candidates": null,
@@ -301,7 +301,7 @@
           "Reduce number of requested rooms",
           "Modify or remove parking requirement"
         ],
-        "duration_seconds": 0.15
+        "duration_seconds": 0.13
       },
       "metrics": {
         "complete_candidates": 0,
@@ -367,7 +367,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.32
+        "duration_seconds": 2.08
       },
       "metrics": {
         "complete_candidates": 0,
@@ -436,7 +436,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 2.01
+        "duration_seconds": 3.04
       },
       "metrics": {
         "complete_candidates": 0,
@@ -483,55 +483,38 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_2",
-          "kitchen_1",
-          "pooja_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_2, kitchen_1, pooja_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_2, kitchen_1, pooja_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 4.75
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 5.05
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 64.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 67.9,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 85.0,
-        "final_score": null
+        "vastu_score": 49,
+        "architecture_score": 92.8,
+        "final_score": 49
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "kitchen_1",
-          "bathroom_2",
-          "pooja_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
+        "door_infeasible": false,
         "room_count_valid": true
       }
     },
@@ -564,7 +547,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 10.0
+        "duration_seconds": 7.4
       },
       "metrics": {
         "complete_candidates": null,
@@ -617,7 +600,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 14.27
+        "duration_seconds": 12.87
       },
       "metrics": {
         "complete_candidates": null,
@@ -670,7 +653,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 10.39
+        "duration_seconds": 10.4
       },
       "metrics": {
         "complete_candidates": null,
@@ -736,7 +719,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.22
+        "duration_seconds": 2.03
       },
       "metrics": {
         "complete_candidates": 0,
@@ -793,7 +776,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 7.47
+        "duration_seconds": 6.95
       },
       "metrics": {
         "complete_candidates": null,
@@ -859,7 +842,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.2
+        "duration_seconds": 2.05
       },
       "metrics": {
         "complete_candidates": 0,
@@ -929,7 +912,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.12
+        "duration_seconds": 1.93
       },
       "metrics": {
         "complete_candidates": 0,
@@ -999,7 +982,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.02
+        "duration_seconds": 1.73
       },
       "metrics": {
         "complete_candidates": 0,
@@ -1067,7 +1050,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 0.71
+        "duration_seconds": 1.23
       },
       "metrics": {
         "complete_candidates": 0,
@@ -1135,7 +1118,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.21
+        "duration_seconds": 2.08
       },
       "metrics": {
         "complete_candidates": 0,
@@ -1205,7 +1188,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.21
+        "duration_seconds": 2.05
       },
       "metrics": {
         "complete_candidates": 0,
@@ -1274,7 +1257,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 2.19
+        "duration_seconds": 3.69
       },
       "metrics": {
         "complete_candidates": 0,
@@ -1330,7 +1313,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 5.32
+        "duration_seconds": 5.31
       },
       "metrics": {
         "complete_candidates": null,
@@ -1396,7 +1379,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.21
+        "duration_seconds": 2.12
       },
       "metrics": {
         "complete_candidates": 0,
@@ -1466,7 +1449,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.21
+        "duration_seconds": 2.06
       },
       "metrics": {
         "complete_candidates": 0,
@@ -1523,7 +1506,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 7.95
+        "duration_seconds": 7.98
       },
       "metrics": {
         "complete_candidates": null,
@@ -1576,7 +1559,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 6.05
+        "duration_seconds": 6.13
       },
       "metrics": {
         "complete_candidates": null,
@@ -1642,7 +1625,7 @@
           "Modify or remove parking requirement to free frontage for room connectivity",
           "Relax architectural direct-access constraints if permissible"
         ],
-        "duration_seconds": 1.19
+        "duration_seconds": 2.15
       },
       "metrics": {
         "complete_candidates": 0,

@@ -11,7 +11,8 @@ from vastu.rules import VASTU_RULES
 import random
 import math
 from layout.expansion import expand_rooms
-from layout.orientation import normalize_orientation, get_boundary_coordinate
+from layout.orientation import normalize_orientation, get_boundary_coordinate, is_room_on_boundary
+
 
 def get_vastu_penalty(x, y, w, d, r_type, plot_w, plot_d, facing):
     coverage = get_zone_coverage(x, y, w, d, plot_w, plot_d)
@@ -53,7 +54,7 @@ def get_vastu_penalty(x, y, w, d, r_type, plot_w, plot_d, facing):
             
     return penalty
 
-def generate_layout(reqs: FloorPlanRequirements, seed: int = 0, strategy: str = 'baseline') -> FloorPlan:
+def generate_layout(reqs: FloorPlanRequirements, seed: int = 0, strategy: str = 'baseline', root_variant: str = 'A') -> FloorPlan:
     plot_w = reqs.plot.width
     plot_d = reqs.plot.depth
     facing = reqs.plot.facing.lower()
@@ -70,10 +71,16 @@ def generate_layout(reqs: FloorPlanRequirements, seed: int = 0, strategy: str = 
         facing_norm = normalize_orientation(facing)
         axis, min_val, max_val, target_val = get_boundary_coordinate(facing_norm, plot_w, plot_d)
         
-        if axis == 'x':
-            best_pos = (target_val - w if target_val > 0 else 0, 0, w, d)
+        if root_variant == 'B':
+            if axis == 'x':
+                best_pos = (target_val - w if target_val > 0 else 0, plot_d - d, w, d)
+            else:
+                best_pos = (plot_w - w, target_val - d if target_val > 0 else 0, w, d)
         else:
-            best_pos = (0, target_val - d if target_val > 0 else 0, w, d)
+            if axis == 'x':
+                best_pos = (target_val - w if target_val > 0 else 0, 0, w, d)
+            else:
+                best_pos = (0, target_val - d if target_val > 0 else 0, w, d)
             
         placed_rooms.append({
             'id': 'parking_1', 'type': 'parking', 'name': 'Parking',
@@ -631,50 +638,110 @@ def build_floorplan(placed_rooms, reqs, plot_w, plot_d, facing):
         entrance=entrance, vehicle_gate=vehicle_gate
     )
 
-def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'balanced', beam_width: int = 15, max_candidates_per_room: int = 6) -> tuple[list[FloorPlan], dict]:
-    plot_w, plot_d, facing = reqs.plot.width, reqs.plot.depth, reqs.plot.facing.lower()
+def validate_root_topology(root_rooms: list, plot_w: float, plot_d: float, facing: str) -> bool:
+    """
+    Validates that a root candidate (Parking + Hall) satisfies all hard boundary
+    and frontage constraints before entering expensive room beam search.
+    """
+    hall = next((r for r in root_rooms if r['type'] == 'hall'), None)
+    if not hall:
+        return False
+        
+    parking = next((r for r in root_rooms if r['type'] == 'parking'), None)
     
-    metrics = {
-        "search_nodes": 0,
-        "branches_pruned": 0,
-        "partial_candidates": 0,
-        "complete_candidates": 0,
-        "beam_width": beam_width,
-        "max_candidates_per_room": max_candidates_per_room,
-        "room_candidate_diagnostics": {}
-    }
+    # 1. Check within plot
+    for r in [hall, parking]:
+        if not r:
+            continue
+        if r['x'] < -0.01 or r['y'] < -0.01:
+            return False
+        if r['x'] + r['width'] > plot_w + 0.01 or r['y'] + r['depth'] > plot_d + 0.01:
+            return False
+            
+    # 2. Check no overlap between Hall and Parking
+    if parking and boxes_intersect(hall, parking):
+        return False
+        
+    # 3. Check dimensions
+    if hall['width'] < 10.0 or hall['depth'] < 12.0:
+        return False
+    if parking and (parking['width'] < 9.0 or parking['depth'] < 16.0):
+        return False
+        
+    # 4. Check Hall has valid exterior frontage on requested facing
+    if not is_room_on_boundary(hall, facing, plot_w, plot_d):
+        return False
+    if parking and not is_room_on_boundary(parking, facing, plot_w, plot_d):
+        return False
+        
+    # 5. Check entrance and vehicle gate destinations
+    entrance = create_main_entrance(plot_w, plot_d, facing, root_rooms)
+    if not entrance or entrance.room != hall['id']:
+        return False
+        
+    if parking:
+        gate = create_vehicle_gate(plot_w, plot_d, facing, root_rooms)
+        if not gate or gate.room != parking['id']:
+            return False
+            
+    return True
+
+
+def generate_root_candidates(reqs: FloorPlanRequirements) -> list[tuple[str, list[dict]]]:
+    """
+    Generates deterministic root candidate topologies:
+    Root A: Existing baseline parking/hall arrangement
+    Root B: Alternate parking-side / frontage configuration (if parking requested and distinct)
+    """
+    plot_w = reqs.plot.width
+    plot_d = reqs.plot.depth
+    facing = reqs.plot.facing.lower()
     
-    # 1. Base setup (Parking + Hall are fixed deterministically for now as they are root nodes)
-    # Re-use the existing logic to place them
-    base_plan = generate_layout(reqs, seed=42, strategy='baseline')
-    initial_rooms = [r.model_dump() for r in base_plan.rooms if r.type in ['parking', 'hall']]
-    # We must convert pydantic dict to our expected format
-    for r in initial_rooms:
+    roots = []
+    
+    # Root A: Baseline
+    base_plan = generate_layout(reqs, seed=42, strategy='baseline', root_variant='A')
+    initial_a = [r.model_dump() for r in base_plan.rooms if r.type in ['parking', 'hall']]
+    for r in initial_a:
         r['area'] = r['width'] * r['depth']
         
-    other_rooms = []
-    priority = ['bedroom', 'kitchen', 'pooja', 'bathroom', 'dining', 'utility']
-    if strategy == 'pooja_first': priority = ['pooja', 'bedroom', 'kitchen', 'bathroom', 'dining', 'utility']
-    elif strategy == 'kitchen_first': priority = ['kitchen', 'bedroom', 'pooja', 'bathroom', 'dining', 'utility']
-    elif strategy == 'bedroom_first': priority = ['bedroom', 'kitchen', 'pooja', 'bathroom', 'dining', 'utility']
-    elif strategy == 'bathroom_avoidance': priority = ['bedroom', 'kitchen', 'bathroom', 'pooja', 'dining', 'utility']
-    elif strategy == 'space_first': priority = ['bedroom', 'kitchen', 'dining', 'pooja', 'bathroom', 'utility']
-    elif strategy == 'balanced': priority = ['bedroom', 'kitchen', 'pooja', 'bathroom', 'dining', 'utility']
-    elif strategy == 'vastu_first': priority = ['bedroom', 'kitchen', 'pooja', 'bathroom', 'dining', 'utility']
-    
-    for p in priority:
-        count = reqs.rooms.get(p, 0)
-        norm_type = normalize_room_name(p)
-        for i in range(count):
-            other_rooms.append({'type': norm_type, 'name': f'{norm_type.capitalize()} {i+1}' if count > 1 else norm_type.capitalize(), 'id': f'{norm_type}_{i+1}'})
-    for r_type, count in reqs.rooms.items():
-        if r_type == 'hall' or r_type == 'parking' or r_type in priority: continue
-        norm_type = normalize_room_name(r_type)
-        for i in range(count):
-            other_rooms.append({'type': norm_type, 'name': f'{norm_type.capitalize()} {i+1}' if count > 1 else norm_type.capitalize(), 'id': f'{norm_type}_{i+1}'})
+    if validate_root_topology(initial_a, plot_w, plot_d, facing):
+        roots.append(('Root_A', initial_a))
+        
+    # Root B: Alternate parking-side / frontage configuration
+    has_parking = reqs.parking or reqs.rooms.get('parking', 0) > 0
+    if has_parking:
+        plan_b = generate_layout(reqs, seed=42, strategy='baseline', root_variant='B')
+        initial_b = [r.model_dump() for r in plan_b.rooms if r.type in ['parking', 'hall']]
+        for r in initial_b:
+            r['area'] = r['width'] * r['depth']
             
+        is_distinct = False
+        if initial_a and initial_b:
+            p_a = next((r for r in initial_a if r['type'] == 'parking'), None)
+            p_b = next((r for r in initial_b if r['type'] == 'parking'), None)
+            if p_a and p_b and (abs(p_a['x'] - p_b['x']) > 1.0 or abs(p_a['y'] - p_b['y']) > 1.0):
+                is_distinct = True
+                
+        if is_distinct and validate_root_topology(initial_b, plot_w, plot_d, facing):
+            roots.append(('Root_B', initial_b))
+            
+    return roots
+
+
+def _run_beam_search_on_root(
+    initial_rooms: list,
+    other_rooms: list,
+    reqs: FloorPlanRequirements,
+    plot_w: float,
+    plot_d: float,
+    facing: str,
+    strategy: str,
+    beam_width: int,
+    max_candidates_per_room: int,
+    metrics: dict
+) -> tuple[list[FloorPlan], dict]:
     states = [{'rooms': initial_rooms, 'score': (0, 0, 0, 0)}]
-    
     unplaced_rooms = other_rooms.copy()
     
     for room in other_rooms:
@@ -738,8 +805,6 @@ def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'ba
                 if connected and not valid_passage_connection:
                     topo_penalty += 1000
                     
-                # print(f"Room {new_room['id']} topo_penalty: {topo_penalty}")
-                
                 # We also penalize distance slightly to encourage compact packing
                 hx = initial_rooms[0]['x'] if initial_rooms else plot_w/2
                 hy = initial_rooms[0]['y'] if initial_rooms else plot_d/2
@@ -754,8 +819,6 @@ def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'ba
                 next_states.append({'rooms': new_rooms, 'score': new_score})
                 
         if not next_states:
-            # Debug: which room killed the beam search?
-            print(f"[BEAM DEAD] Room '{room['type']}' produced 0 next_states. States before: {len(states)}")
             return [], metrics # Dead branch, no solutions
             
         next_states.sort(key=lambda s: (s['score'][0], s['score'][1], s['score'][2], s['score'][3]))
@@ -765,11 +828,79 @@ def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'ba
         
     metrics["complete_candidates"] = len(states)
     
-    if states:
-        pass
-        
     final_plans = []
     for s in states:
         rooms_to_build = expand_rooms(s['rooms'], plot_w, plot_d)
         final_plans.append(build_floorplan(rooms_to_build, reqs, plot_w, plot_d, facing))
     return final_plans, metrics
+
+
+def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'balanced', beam_width: int = 15, max_candidates_per_room: int = 6, root_variant: str = None) -> tuple[list[FloorPlan], dict]:
+    plot_w, plot_d, facing = reqs.plot.width, reqs.plot.depth, reqs.plot.facing.lower()
+    
+    metrics = {
+        "search_nodes": 0,
+        "branches_pruned": 0,
+        "partial_candidates": 0,
+        "complete_candidates": 0,
+        "beam_width": beam_width,
+        "max_candidates_per_room": max_candidates_per_room,
+        "room_candidate_diagnostics": {},
+        "root_candidates_evaluated": 0,
+        "root_a_evaluated": False,
+        "root_b_evaluated": False,
+        "root_a_succeeded": False,
+        "root_b_succeeded": False,
+        "selected_root": None
+    }
+    
+    other_rooms = []
+    priority = ['bedroom', 'kitchen', 'pooja', 'bathroom', 'dining', 'utility']
+    if strategy == 'pooja_first': priority = ['pooja', 'bedroom', 'kitchen', 'bathroom', 'dining', 'utility']
+    elif strategy == 'kitchen_first': priority = ['kitchen', 'bedroom', 'pooja', 'bathroom', 'dining', 'utility']
+    elif strategy == 'bedroom_first': priority = ['bedroom', 'kitchen', 'pooja', 'bathroom', 'dining', 'utility']
+    elif strategy == 'bathroom_avoidance': priority = ['bedroom', 'kitchen', 'bathroom', 'pooja', 'dining', 'utility']
+    elif strategy == 'space_first': priority = ['bedroom', 'kitchen', 'dining', 'pooja', 'bathroom', 'utility']
+    elif strategy == 'balanced': priority = ['bedroom', 'kitchen', 'pooja', 'bathroom', 'dining', 'utility']
+    elif strategy == 'vastu_first': priority = ['bedroom', 'kitchen', 'pooja', 'bathroom', 'dining', 'utility']
+    
+    for p in priority:
+        count = reqs.rooms.get(p, 0)
+        norm_type = normalize_room_name(p)
+        for i in range(count):
+            other_rooms.append({'type': norm_type, 'name': f'{norm_type.capitalize()} {i+1}' if count > 1 else norm_type.capitalize(), 'id': f'{norm_type}_{i+1}'})
+    for r_type, count in reqs.rooms.items():
+        if r_type == 'hall' or r_type == 'parking' or r_type in priority: continue
+        norm_type = normalize_room_name(r_type)
+        for i in range(count):
+            other_rooms.append({'type': norm_type, 'name': f'{norm_type.capitalize()} {i+1}' if count > 1 else norm_type.capitalize(), 'id': f'{norm_type}_{i+1}'})
+
+    root_candidates = generate_root_candidates(reqs)
+    
+    if root_variant == 'A':
+        root_candidates = [r for r in root_candidates if r[0] == 'Root_A']
+    elif root_variant == 'B':
+        root_candidates = [r for r in root_candidates if r[0] == 'Root_B']
+        
+    for root_id, initial_rooms in root_candidates:
+        metrics["root_candidates_evaluated"] += 1
+        if root_id == 'Root_A':
+            metrics["root_a_evaluated"] = True
+        elif root_id == 'Root_B':
+            metrics["root_b_evaluated"] = True
+            
+        final_plans, metrics = _run_beam_search_on_root(
+            initial_rooms, other_rooms, reqs, plot_w, plot_d, facing, strategy,
+            beam_width, max_candidates_per_room, metrics
+        )
+        
+        if final_plans:
+            if root_id == 'Root_A':
+                metrics["root_a_succeeded"] = True
+            elif root_id == 'Root_B':
+                metrics["root_b_succeeded"] = True
+            metrics["selected_root"] = root_id
+            return final_plans, metrics
+            
+    return [], metrics
+
