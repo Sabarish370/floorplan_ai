@@ -50,14 +50,16 @@ def validate_circulation_constraints(floorplan):
                 target_type = extract_base_type(room.type)
                 
                 if path_len > 1:
-                    if target_type == 'bedroom' and CIRCULATION_CONSTRAINTS.get("require_direct_hall_access_for_bedrooms", False):
-                        rejections.append("bedroom_access_rejections")
-                    elif target_type == 'kitchen' and CIRCULATION_CONSTRAINTS.get("require_direct_hall_access_for_kitchen", False):
-                        # Main kitchen requires direct hall access; secondary kitchen (utility/wet) can connect via main kitchen
-                        if room.id == 'kitchen_1' or not any(int_r.startswith('kitchen') for int_r in intermediate_rooms):
-                            rejections.append("kitchen_access_rejections")
-                    elif target_type == 'pooja' and CIRCULATION_CONSTRAINTS.get("require_direct_hall_access_for_pooja", False):
-                        rejections.append("pooja_access_rejections")
+                    has_circ_passage = any(extract_base_type(G.nodes[int_r]['type']) == 'circulation' for int_r in intermediate_rooms)
+                    if not has_circ_passage:
+                        if target_type == 'bedroom' and CIRCULATION_CONSTRAINTS.get("require_direct_hall_access_for_bedrooms", False):
+                            rejections.append("bedroom_access_rejections")
+                        elif target_type == 'kitchen' and CIRCULATION_CONSTRAINTS.get("require_direct_hall_access_for_kitchen", False):
+                            # Main kitchen requires direct hall access; secondary kitchen (utility/wet) can connect via main kitchen
+                            if room.id == 'kitchen_1' or not any(int_r.startswith('kitchen') for int_r in intermediate_rooms):
+                                rejections.append("kitchen_access_rejections")
+                        elif target_type == 'pooja' and CIRCULATION_CONSTRAINTS.get("require_direct_hall_access_for_pooja", False):
+                            rejections.append("pooja_access_rejections")
                         
     if "exterior" in G:
         for node in G.nodes():
@@ -254,7 +256,7 @@ def evaluate_architecture(floorplan):
         room_realism_details = {}
         
         # Calculate total residential area
-        total_residential_area = sum(r.width * r.depth for r in floorplan.rooms if r.type != 'parking')
+        total_residential_area = sum(r.width * r.depth for r in floorplan.rooms if r.type not in ['parking', 'circulation'])
         
         # Semantic relative scale expectations
         # Expected relative size (0.0 to 1.0) compared to average room
@@ -270,7 +272,7 @@ def evaluate_architecture(floorplan):
         }
         
         for room in floorplan.rooms:
-            if room.type == 'parking':
+            if room.type in ['parking', 'circulation']:
                 continue
                 
             r_type = extract_base_type(room.type)
@@ -300,12 +302,12 @@ def evaluate_architecture(floorplan):
             # Penalize disproportionate area allocation
             # E.g. A bathroom should not exceed 10% of total residential area if there are multiple rooms
             # A bedroom should not consume 40% of the entire house if there are 5 rooms
-            total_rooms = len([r for r in floorplan.rooms if r.type != 'parking'])
+            total_rooms = len([r for r in floorplan.rooms if r.type not in ['parking', 'circulation']])
             average_share = 1.0 / total_rooms if total_rooms > 0 else 1.0
             
             expected_share = average_share * expected_scale
             # Normalize expected shares
-            total_expected = sum(semantic_scale.get(extract_base_type(r.type), 1.0) for r in floorplan.rooms if r.type != 'parking')
+            total_expected = sum(semantic_scale.get(extract_base_type(r.type), 1.0) for r in floorplan.rooms if r.type not in ['parking', 'circulation'])
             normalized_expected_share = expected_scale / total_expected if total_expected > 0 else expected_share
             
             max_mult = 2.5 if total_rooms <= 5 else 2.2

@@ -37,7 +37,7 @@ def expand_rooms(placed_rooms, plot_w, plot_d):
         iterations += 1
         
         for room in expanded_rooms:
-            if room['type'] == 'parking':
+            if room['type'] in ['parking', 'circulation']:
                 continue
                 
             r_type = room['type'].split('_')[0]

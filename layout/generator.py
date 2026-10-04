@@ -54,7 +54,7 @@ def get_vastu_penalty(x, y, w, d, r_type, plot_w, plot_d, facing):
             
     return penalty
 
-def generate_layout(reqs: FloorPlanRequirements, seed: int = 0, strategy: str = 'baseline', root_variant: str = 'A') -> FloorPlan:
+def generate_layout(reqs: FloorPlanRequirements, seed: int = 0, strategy: str = 'baseline', root_variant: str = 'A', is_root_generation: bool = False) -> FloorPlan:
     plot_w = reqs.plot.width
     plot_d = reqs.plot.depth
     facing = reqs.plot.facing.lower()
@@ -312,6 +312,22 @@ def generate_layout(reqs: FloorPlanRequirements, seed: int = 0, strategy: str = 
             if (plot_w * plot_d) - placed_area < (total_req_area - placed_area):
                 break # abort this candidate generation early
             
+    total_req_rooms = sum(count for r, count in reqs.rooms.items() if r != 'parking')
+    placed_non_parking = len([r for r in placed_rooms if r['type'] != 'parking'])
+    need_beam_search = False
+    if not is_root_generation:
+        if placed_non_parking < total_req_rooms:
+            need_beam_search = True
+        else:
+            test_doors = generate_internal_doors(placed_rooms)
+            if len(test_doors) < total_req_rooms - 1:
+                need_beam_search = True
+
+    if need_beam_search:
+        beam_plans, _ = generate_layout_beam_search(reqs, strategy=strategy if strategy != 'baseline' else 'balanced')
+        if beam_plans:
+            return beam_plans[0]
+            
     from shapely.geometry import box
     from shapely.ops import unary_union
     polygons = [box(r['x'], r['y'], r['x'] + r['width'], r['y'] + r['depth']) for r in placed_rooms if r['type'] != 'parking']
@@ -354,6 +370,8 @@ def generate_room_candidates(room_info, placed_rooms, reqs, plot_w, plot_d, faci
             sizes = [(16.0, 14.0), (14.0, 16.0), (16.0, 16.0), (18.0, 14.0), (14.0, 14.0)]
         else:
             sizes = [(10.0, 14.0), (10.0, 12.0), (14.0, 12.0), (12.0, 14.0), (14.0, 14.0), (12.0, 12.0), (16.0, 12.0)]
+            if plot_area <= 1200 or plot_w <= 28:
+                sizes = [(10.0, 12.0), (12.0, 10.0), (10.0, 10.0), (10.0, 14.0), (14.0, 10.0), (11.0, 11.0)]
     elif r_type_base == 'kitchen':
         if plot_area >= 1800:
             sizes = [(14.0, 12.0), (12.0, 12.0), (12.0, 10.0), (10.0, 12.0), (10.0, 10.0), (14.0, 14.0)]
@@ -361,6 +379,8 @@ def generate_room_candidates(room_info, placed_rooms, reqs, plot_w, plot_d, faci
             sizes = [(12.0, 12.0), (14.0, 12.0), (12.0, 14.0), (10.0, 10.0)]
         else:
             sizes = [(10.0, 10.0), (12.0, 10.0), (10.0, 12.0)]
+            if plot_area <= 1200 or plot_w <= 28:
+                sizes = [(10.0, 10.0), (10.0, 8.0), (8.0, 10.0), (9.0, 10.0), (12.0, 10.0)]
     elif r_type_base == 'bathroom':
         if plot_area >= 1800:
             sizes = [(10.0, 8.0), (8.0, 10.0), (8.0, 8.0), (10.0, 10.0), (8.0, 6.0), (6.0, 8.0)]
@@ -368,8 +388,12 @@ def generate_room_candidates(room_info, placed_rooms, reqs, plot_w, plot_d, faci
             sizes = [(10.0, 8.0), (8.0, 10.0), (8.0, 8.0), (10.0, 10.0), (8.0, 6.0), (6.0, 8.0)]
         else:
             sizes = [(6.0, 8.0), (8.0, 6.0), (6.0, 6.0), (8.0, 8.0)]
+            if plot_area <= 1200 or plot_w <= 28:
+                sizes = [(5.0, 7.0), (7.0, 5.0), (6.0, 6.0), (6.0, 7.0), (5.0, 8.0), (6.0, 8.0)]
     elif r_type_base == 'pooja':
         sizes = [(6.0, 6.0), (6.0, 8.0), (8.0, 6.0), (4.0, 6.0)]
+        if plot_area <= 1200 or plot_w <= 28:
+            sizes = [(4.0, 5.0), (5.0, 4.0), (4.0, 6.0), (4.0, 4.0), (6.0, 6.0)]
     else:
         sizes = [(base_w, base_d)]
         if base_w != base_d:
@@ -389,18 +413,21 @@ def generate_room_candidates(room_info, placed_rooms, reqs, plot_w, plot_d, faci
     
     candidates = []
     hall_r = next((r for r in placed_rooms if r['type'] == 'hall'), None)
+    circ_r = next((r for r in placed_rooms if r['type'] == 'circulation'), None)
     
     # Determine allowed parent rooms for adjacency
     if r_type.startswith('bedroom'):
-        parent_rooms = [hall_r] if hall_r else []
+        parent_rooms = ([circ_r] if circ_r else []) + ([hall_r] if hall_r else [])
     elif r_type.startswith('kitchen'):
-        parent_rooms = [hall_r] if hall_r else []
+        parent_rooms = ([hall_r] if hall_r else []) + ([circ_r] if circ_r else [])
         parent_rooms += [pr for pr in placed_rooms if pr['type'].startswith('kitchen')]
     elif r_type.startswith('pooja'):
-        parent_rooms = [hall_r] if hall_r else []
+        parent_rooms = ([hall_r] if hall_r else []) + ([circ_r] if circ_r else [])
         parent_rooms += [pr for pr in placed_rooms if pr['type'].startswith('kitchen')]
     elif r_type.startswith('bathroom'):
         parent_rooms = [hall_r] if hall_r else []
+        if circ_r:
+            parent_rooms.append(circ_r)
         bedrooms_with_bath = set()
         for pr in placed_rooms:
             if pr['type'].startswith('bathroom'):
@@ -492,13 +519,19 @@ def generate_room_candidates(room_info, placed_rooms, reqs, plot_w, plot_d, faci
                     else: room_diagnostics[r_type]["neutral_zone_candidates_rejected"] += 1
                 continue
                 
-            # Direct hall connection check
+            # Direct hall / circulation connection check
             connected_to_hall = False
+            connected_to_circ = False
             valid_passage_connection = False
             if hall_r:
                 edge = get_shared_edge(c, hall_r)
                 if edge and max(abs(edge['x2'] - edge['x1']), abs(edge['y2'] - edge['y1'])) >= 3.0:
                     connected_to_hall = True
+                    valid_passage_connection = True
+            if circ_r:
+                edge = get_shared_edge(c, circ_r)
+                if edge and max(abs(edge['x2'] - edge['x1']), abs(edge['y2'] - edge['y1'])) >= 3.0:
+                    connected_to_circ = True
                     valid_passage_connection = True
             
             # Check connection to other placed rooms
@@ -518,14 +551,14 @@ def generate_room_candidates(room_info, placed_rooms, reqs, plot_w, plot_d, faci
                         if r_type.startswith('pooja'):
                             connected_to_hall = True
                             
-            connected = connected_to_hall or connected_to_other
+            connected = connected_to_hall or connected_to_circ or connected_to_other
             
-            # Enforce strictly: bedroom MUST connect directly to Hall
-            if r_type.startswith('bedroom') and not connected_to_hall:
+            # Enforce strictly: bedroom MUST connect directly to Hall OR Circulation
+            if r_type.startswith('bedroom') and not (connected_to_hall or connected_to_circ):
                 continue
                 
-            # Kitchen MUST connect to Hall (unless wet kitchen attached to another kitchen)
-            if r_type.startswith('kitchen') and not connected_to_hall:
+            # Kitchen MUST connect to Hall OR Circulation (unless wet kitchen attached to another kitchen)
+            if r_type.startswith('kitchen') and not (connected_to_hall or connected_to_circ):
                 is_secondary_kitchen = any(pr['type'].startswith('kitchen') for pr in placed_rooms 
                                            if get_shared_edge(c, pr) and max(abs(get_shared_edge(c, pr)['x2'] - get_shared_edge(c, pr)['x1']), abs(get_shared_edge(c, pr)['y2'] - get_shared_edge(c, pr)['y1'])) >= 3.0)
                 if not is_secondary_kitchen:
@@ -700,7 +733,7 @@ def generate_root_candidates(reqs: FloorPlanRequirements) -> list[tuple[str, lis
     roots = []
     
     # Root A: Baseline
-    base_plan = generate_layout(reqs, seed=42, strategy='baseline', root_variant='A')
+    base_plan = generate_layout(reqs, seed=42, strategy='baseline', root_variant='A', is_root_generation=True)
     initial_a = [r.model_dump() for r in base_plan.rooms if r.type in ['parking', 'hall']]
     for r in initial_a:
         r['area'] = r['width'] * r['depth']
@@ -711,7 +744,7 @@ def generate_root_candidates(reqs: FloorPlanRequirements) -> list[tuple[str, lis
     # Root B: Alternate parking-side / frontage configuration
     has_parking = reqs.parking or reqs.rooms.get('parking', 0) > 0
     if has_parking:
-        plan_b = generate_layout(reqs, seed=42, strategy='baseline', root_variant='B')
+        plan_b = generate_layout(reqs, seed=42, strategy='baseline', root_variant='B', is_root_generation=True)
         initial_b = [r.model_dump() for r in plan_b.rooms if r.type in ['parking', 'hall']]
         for r in initial_b:
             r['area'] = r['width'] * r['depth']
@@ -727,6 +760,134 @@ def generate_root_candidates(reqs: FloorPlanRequirements) -> list[tuple[str, lis
             roots.append(('Root_B', initial_b))
             
     return roots
+
+
+def generate_circulation_candidates(
+    initial_rooms: list,
+    reqs: FloorPlanRequirements,
+    plot_w: float,
+    plot_d: float,
+    facing: str
+) -> list[dict]:
+    """
+    Deterministically generates candidate circulation entities (e.g. short circulation spine)
+    attached directly to Hall's interior edge when direct Hall boundary is insufficient.
+    """
+    hall = next((r for r in initial_rooms if r['type'] == 'hall'), None)
+    if not hall:
+        return []
+        
+    parking = next((r for r in initial_rooms if r['type'] == 'parking'), None)
+    
+    facing_norm = normalize_orientation(facing)
+    axis, _, _, target_val = get_boundary_coordinate(facing_norm, plot_w, plot_d)
+    
+    # Minimum clear passage width >= 3.5 ft, standardized to 4.0 ft
+    circ_w = 4.0
+    
+    # Depth/length derived from plot depth and branch span:
+    if axis == 'y':
+        circ_d = max(8.0, min(14.0, round((plot_d * 0.25) / 2) * 2))
+    else:
+        circ_d = max(8.0, min(14.0, round((plot_w * 0.25) / 2) * 2))
+        
+    candidates = []
+    hx, hy = hall['x'], hall['y']
+    hw, hd = hall['width'], hall['depth']
+    
+    if facing_norm == 'south':
+        # Hall is at South (road at y = plot_d). Interior edge is North (y = hy).
+        cy = hy - circ_d
+        x_positions = []
+        if parking and parking['x'] < hx:
+            x_positions.append(parking['x'] + parking['width'])
+            x_positions.append(hx)
+        elif parking and parking['x'] > hx:
+            x_positions.append(hx + hw - circ_w)
+            x_positions.append(parking['x'] - circ_w)
+        else:
+            x_positions.append(hx)
+            x_positions.append(hx + (hw - circ_w) / 2)
+            x_positions.append(hx + hw - circ_w)
+            
+        for cx in x_positions:
+            c = {'x': float(cx), 'y': float(cy), 'width': float(circ_w), 'depth': float(circ_d)}
+            if c['x'] < -0.01 or c['y'] < -0.01 or c['x'] + c['width'] > plot_w + 0.01 or c['y'] + c['depth'] > plot_d + 0.01:
+                continue
+            if any(boxes_intersect(c, r) for r in initial_rooms):
+                continue
+            edge = get_shared_edge(c, hall)
+            if edge and max(abs(edge['x2'] - edge['x1']), abs(edge['y2'] - edge['y1'])) >= 3.0:
+                c['area'] = c['width'] * c['depth']
+                c['id'] = 'circulation_1'
+                c['type'] = 'circulation'
+                c['name'] = 'Circulation'
+                candidates.append(c)
+                
+    elif facing_norm == 'north':
+        # Hall is at North (road at y = 0). Interior edge is South (y = hy + hd).
+        cy = hy + hd
+        x_positions = [hx, hx + (hw - circ_w) / 2, hx + hw - circ_w]
+        if parking and parking['x'] < hx:
+            x_positions.insert(0, parking['x'] + parking['width'])
+        for cx in x_positions:
+            c = {'x': float(cx), 'y': float(cy), 'width': float(circ_w), 'depth': float(circ_d)}
+            if c['x'] < -0.01 or c['y'] < -0.01 or c['x'] + c['width'] > plot_w + 0.01 or c['y'] + c['depth'] > plot_d + 0.01:
+                continue
+            if any(boxes_intersect(c, r) for r in initial_rooms):
+                continue
+            edge = get_shared_edge(c, hall)
+            if edge and max(abs(edge['x2'] - edge['x1']), abs(edge['y2'] - edge['y1'])) >= 3.0:
+                c['area'] = c['width'] * c['depth']
+                c['id'] = 'circulation_1'
+                c['type'] = 'circulation'
+                c['name'] = 'Circulation'
+                candidates.append(c)
+
+    elif facing_norm == 'east':
+        # Hall is at East (road at x = plot_w). Interior edge is West (x = hx).
+        cx = hx - circ_d
+        y_positions = [hy, hy + (hd - circ_w) / 2, hy + hd - circ_w]
+        for cy in y_positions:
+            c = {'x': float(cx), 'y': float(cy), 'width': float(circ_d), 'depth': float(circ_w)}
+            if c['x'] < -0.01 or c['y'] < -0.01 or c['x'] + c['width'] > plot_w + 0.01 or c['y'] + c['depth'] > plot_d + 0.01:
+                continue
+            if any(boxes_intersect(c, r) for r in initial_rooms):
+                continue
+            edge = get_shared_edge(c, hall)
+            if edge and max(abs(edge['x2'] - edge['x1']), abs(edge['y2'] - edge['y1'])) >= 3.0:
+                c['area'] = c['width'] * c['depth']
+                c['id'] = 'circulation_1'
+                c['type'] = 'circulation'
+                c['name'] = 'Circulation'
+                candidates.append(c)
+
+    elif facing_norm == 'west':
+        # Hall is at West (road at x = 0). Interior edge is East (x = hx + hw).
+        cx = hx + hw
+        y_positions = [hy, hy + (hd - circ_w) / 2, hy + hd - circ_w]
+        for cy in y_positions:
+            c = {'x': float(cx), 'y': float(cy), 'width': float(circ_d), 'depth': float(circ_w)}
+            if c['x'] < -0.01 or c['y'] < -0.01 or c['x'] + c['width'] > plot_w + 0.01 or c['y'] + c['depth'] > plot_d + 0.01:
+                continue
+            if any(boxes_intersect(c, r) for r in initial_rooms):
+                continue
+            edge = get_shared_edge(c, hall)
+            if edge and max(abs(edge['x2'] - edge['x1']), abs(edge['y2'] - edge['y1'])) >= 3.0:
+                c['area'] = c['width'] * c['depth']
+                c['id'] = 'circulation_1'
+                c['type'] = 'circulation'
+                c['name'] = 'Circulation'
+                candidates.append(c)
+
+    unique_cands = []
+    seen = set()
+    for c in candidates:
+        key = (round(c['x'], 2), round(c['y'], 2), round(c['width'], 2), round(c['depth'], 2))
+        if key not in seen:
+            seen.add(key)
+            unique_cands.append(c)
+    return unique_cands
 
 
 def _run_beam_search_on_root(
@@ -772,13 +933,24 @@ def _run_beam_search_on_root(
                 
                 # Check soft connectivity and topological penalty
                 connected = False
+                connected_to_hall = False
+                connected_to_circ = False
                 valid_passage_connection = False
                 
                 hall_r = next((r for r in placed_rooms if r['type'] == 'hall'), None)
+                circ_r = next((r for r in placed_rooms if r['type'] == 'circulation'), None)
                 if hall_r:
                     edge = get_shared_edge(new_room, hall_r)
                     if edge and max(abs(edge['x2'] - edge['x1']), abs(edge['y2'] - edge['y1'])) >= 3.0:
                         connected = True
+                        connected_to_hall = True
+                        valid_passage_connection = True
+                        
+                if circ_r:
+                    edge = get_shared_edge(new_room, circ_r)
+                    if edge and max(abs(edge['x2'] - edge['x1']), abs(edge['y2'] - edge['y1'])) >= 3.0:
+                        connected = True
+                        connected_to_circ = True
                         valid_passage_connection = True
                         
                 for pr in placed_rooms:
@@ -794,9 +966,16 @@ def _run_beam_search_on_root(
                         elif pr_base == 'kitchen' and (room['type'].startswith('pooja') or room['type'].startswith('kitchen')):
                             valid_passage_connection = True
                             
-                # Strict invariant: bedroom must connect to hall
-                if room['type'].startswith('bedroom') and not (hall_r and get_shared_edge(new_room, hall_r) and max(abs(get_shared_edge(new_room, hall_r)['x2'] - get_shared_edge(new_room, hall_r)['x1']), abs(get_shared_edge(new_room, hall_r)['y2'] - get_shared_edge(new_room, hall_r)['y1'])) >= 3.0):
+                # Strict invariant: bedroom must connect to hall or circulation
+                if room['type'].startswith('bedroom') and not (connected_to_hall or connected_to_circ):
                     continue
+                    
+                # Kitchen must connect to hall or circulation (or secondary kitchen)
+                if room['type'].startswith('kitchen') and not (connected_to_hall or connected_to_circ):
+                    is_sec = any(pr['type'].startswith('kitchen') for pr in placed_rooms 
+                                 if get_shared_edge(new_room, pr) and max(abs(get_shared_edge(new_room, pr)['x2'] - get_shared_edge(new_room, pr)['x1']), abs(get_shared_edge(new_room, pr)['y2'] - get_shared_edge(new_room, pr)['y1'])) >= 3.0)
+                    if not is_sec:
+                        continue
                             
                 topo_penalty = 0
                 if room['type'].startswith('pooja') and any(pr['type'].startswith('kitchen') for pr in placed_rooms if get_shared_edge(new_room, pr) and max(abs(get_shared_edge(new_room, pr)['x2'] - get_shared_edge(new_room, pr)['x1']), abs(get_shared_edge(new_room, pr)['y2'] - get_shared_edge(new_room, pr)['y1'])) >= 3.0):
@@ -835,7 +1014,7 @@ def _run_beam_search_on_root(
     return final_plans, metrics
 
 
-def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'balanced', beam_width: int = 15, max_candidates_per_room: int = 6, root_variant: str = None) -> tuple[list[FloorPlan], dict]:
+def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'balanced', beam_width: int = 15, max_candidates_per_room: int = 6, root_variant: str = None, allow_circulation: bool = True) -> tuple[list[FloorPlan], dict]:
     plot_w, plot_d, facing = reqs.plot.width, reqs.plot.depth, reqs.plot.facing.lower()
     
     metrics = {
@@ -851,7 +1030,10 @@ def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'ba
         "root_b_evaluated": False,
         "root_a_succeeded": False,
         "root_b_succeeded": False,
-        "selected_root": None
+        "circulation_evaluated": False,
+        "circulation_succeeded": False,
+        "selected_root": None,
+        "topology_selected": "STAR"
     }
     
     other_rooms = []
@@ -882,6 +1064,7 @@ def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'ba
     elif root_variant == 'B':
         root_candidates = [r for r in root_candidates if r[0] == 'Root_B']
         
+    # Phase 1: Try Star Topology roots
     for root_id, initial_rooms in root_candidates:
         metrics["root_candidates_evaluated"] += 1
         if root_id == 'Root_A':
@@ -894,13 +1077,61 @@ def generate_layout_beam_search(reqs: FloorPlanRequirements, strategy: str = 'ba
             beam_width, max_candidates_per_room, metrics
         )
         
-        if final_plans:
+        valid_plans = []
+        from layout.validator import validate_layout
+        from layout.architecture import validate_final_circulation_invariants
+        for p in final_plans:
+            val = validate_layout(p)
+            circ_val = validate_final_circulation_invariants(p)
+            if val.get('valid') and circ_val.get('circulation_valid'):
+                valid_plans.append(p)
+                
+        if valid_plans:
             if root_id == 'Root_A':
                 metrics["root_a_succeeded"] = True
             elif root_id == 'Root_B':
                 metrics["root_b_succeeded"] = True
             metrics["selected_root"] = root_id
-            return final_plans, metrics
+            metrics["topology_selected"] = "STAR"
+            return valid_plans, metrics
+
+    # Phase 2: Adaptive Circulation Topology Fallback
+    if allow_circulation:
+        circ_roots = []
+        for root_id, initial_rooms in root_candidates:
+            c_cands = generate_circulation_candidates(initial_rooms, reqs, plot_w, plot_d, facing)
+            for c_idx, c_room in enumerate(c_cands):
+                circ_roots.append((f"{root_id}_Circ_{c_idx+1}", initial_rooms + [c_room]))
+                
+        for circ_root_id, circ_initial_rooms in circ_roots:
+            metrics["root_candidates_evaluated"] += 1
+            metrics["circulation_evaluated"] = True
+            
+            circ_other_rooms = other_rooms.copy()
+            circ_priority = ['bedroom', 'kitchen', 'bathroom', 'pooja', 'dining', 'utility']
+            circ_other_rooms.sort(key=lambda r: circ_priority.index(r['type']) if r['type'] in circ_priority else 99)
+            
+            final_plans, metrics = _run_beam_search_on_root(
+                circ_initial_rooms, circ_other_rooms, reqs, plot_w, plot_d, facing, strategy,
+                beam_width=max(beam_width, 25),
+                max_candidates_per_room=max(max_candidates_per_room, 10),
+                metrics=metrics
+            )
+            
+            valid_plans = []
+            from layout.validator import validate_layout
+            from layout.architecture import validate_final_circulation_invariants
+            for p in final_plans:
+                val = validate_layout(p)
+                circ_val = validate_final_circulation_invariants(p)
+                if val.get('valid') and circ_val.get('circulation_valid'):
+                    valid_plans.append(p)
+                    
+            if valid_plans:
+                metrics["circulation_succeeded"] = True
+                metrics["selected_root"] = circ_root_id
+                metrics["topology_selected"] = "CIRCULATION_SPINE"
+                return valid_plans, metrics
             
     return [], metrics
 

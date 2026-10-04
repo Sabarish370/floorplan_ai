@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-04 16:51:32",
+  "generated_at": "2026-10-04 19:30:59",
   "total_cases": 26,
   "summary": {
-    "valid": 12,
+    "valid": 25,
     "retryable_failure": 0,
-    "infeasible_request": 14,
+    "infeasible_request": 1,
     "failed": 0,
     "invalid_plans_rendered": 0,
-    "total_duration_seconds": 219.89
+    "total_duration_seconds": 485.95
   },
   "procedural_comparison": {
     "TC1": {
@@ -35,10 +35,10 @@
       "procedural_valid": true
     },
     "Plot-25x40": {
-      "agentic_status": "INFEASIBLE_REQUEST",
-      "agentic_valid": false,
-      "procedural_status": "FAIL",
-      "procedural_valid": false
+      "agentic_status": "VALID",
+      "agentic_valid": true,
+      "procedural_status": "PASS",
+      "procedural_valid": true
     },
     "Parking-No": {
       "agentic_status": "VALID",
@@ -77,7 +77,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 8.09
+        "duration_seconds": 8.32
       },
       "metrics": {
         "complete_candidates": null,
@@ -85,11 +85,11 @@
         "connectivity_valid_candidates": null,
         "circulation_valid_candidates": null,
         "door_feasible_candidates": null,
-        "space_utilization": 69.0,
+        "space_utilization": 69.2,
         "compactness": null,
-        "vastu_score": 32,
+        "vastu_score": 41,
         "architecture_score": 93.8,
-        "final_score": 32
+        "final_score": 41
       },
       "validation": {
         "geometry_valid": true,
@@ -130,7 +130,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 6.31
+        "duration_seconds": 5.87
       },
       "metrics": {
         "complete_candidates": null,
@@ -183,7 +183,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 5.15
+        "duration_seconds": 5.02
       },
       "metrics": {
         "complete_candidates": null,
@@ -236,7 +236,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 1.78
+        "duration_seconds": 1.69
       },
       "metrics": {
         "complete_candidates": null,
@@ -301,7 +301,7 @@
           "Reduce number of requested rooms",
           "Modify or remove parking requirement"
         ],
-        "duration_seconds": 0.13
+        "duration_seconds": 0.15
       },
       "metrics": {
         "complete_candidates": 0,
@@ -343,56 +343,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 2.08
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 12.77
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 79.3,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 88.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 87.0,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -413,56 +396,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 3.04
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 15.8
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 67.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 77.3,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 84.0,
-        "final_score": null
+        "vastu_score": 43,
+        "architecture_score": 87.0,
+        "final_score": 43
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1",
-          "bathroom_2"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -494,7 +460,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 5.05
+        "duration_seconds": 5.03
       },
       "metrics": {
         "complete_candidates": null,
@@ -547,7 +513,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 7.4
+        "duration_seconds": 7.05
       },
       "metrics": {
         "complete_candidates": null,
@@ -600,7 +566,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 12.87
+        "duration_seconds": 12.26
       },
       "metrics": {
         "complete_candidates": null,
@@ -653,7 +619,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 10.4
+        "duration_seconds": 9.94
       },
       "metrics": {
         "complete_candidates": null,
@@ -695,56 +661,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 2.03
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 12.85
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 79.3,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 88.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 87.0,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -769,22 +718,22 @@
         "failure_classification": "NONE",
         "valid": true,
         "rendered": true,
-        "attempted_iterations": 1,
+        "attempted_iterations": 2,
         "retry_recommended": true,
-        "dominant_issue": "SUCCESS",
+        "dominant_issue": "ROOM_REALISM_VIOLATION",
         "affected_rooms": [],
-        "diagnosis_reason": null,
+        "diagnosis_reason": "Transient layout failure on attempt 1.",
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 6.95
+        "duration_seconds": 19.74
       },
       "metrics": {
-        "complete_candidates": null,
-        "geometry_valid_candidates": null,
-        "connectivity_valid_candidates": null,
-        "circulation_valid_candidates": null,
-        "door_feasible_candidates": null,
-        "space_utilization": 78.9,
+        "complete_candidates": 25,
+        "geometry_valid_candidates": 1,
+        "connectivity_valid_candidates": 1,
+        "circulation_valid_candidates": 1,
+        "door_feasible_candidates": 1,
+        "space_utilization": 74.5,
         "compactness": null,
         "vastu_score": 6,
         "architecture_score": 96.0,
@@ -818,56 +767,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 2.05
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 12.64
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 79.3,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 88.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 87.0,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -888,55 +820,38 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_2",
-          "kitchen_1",
-          "pooja_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_2, kitchen_1, pooja_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_2, kitchen_1, pooja_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 1.93
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 9.44
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 60.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 72.6,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 85.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 91.0,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "kitchen_1",
-          "bathroom_2",
-          "pooja_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
+        "door_infeasible": false,
         "room_count_valid": true
       }
     },
@@ -958,56 +873,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 1.73
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 8.89
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 77.2,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 88.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 93.2,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -1028,51 +926,38 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 1.23
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 4.28
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 51.6,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 65.8,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 93.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 95.2,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "kitchen_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
+        "door_infeasible": false,
         "room_count_valid": true
       }
     },
@@ -1094,56 +979,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 2.08
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 12.94
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 79.3,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 88.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 87.0,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -1164,56 +1032,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 2.05
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 20.25
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 78.3,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 88.0,
-        "final_score": null
+        "vastu_score": 33,
+        "architecture_score": 86.0,
+        "final_score": 33
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -1234,54 +1085,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 3.69
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 6.65
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 55.2,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 71.4,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 92.0,
-        "final_score": null
+        "vastu_score": 53,
+        "architecture_score": 97.0,
+        "final_score": 53
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -1306,26 +1142,26 @@
         "failure_classification": "NONE",
         "valid": true,
         "rendered": true,
-        "attempted_iterations": 1,
+        "attempted_iterations": 2,
         "retry_recommended": true,
-        "dominant_issue": "SUCCESS",
+        "dominant_issue": "ROOM_REALISM_VIOLATION",
         "affected_rooms": [],
-        "diagnosis_reason": null,
+        "diagnosis_reason": "Transient layout failure on attempt 1.",
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 5.31
+        "duration_seconds": 12.36
       },
       "metrics": {
-        "complete_candidates": null,
-        "geometry_valid_candidates": null,
-        "connectivity_valid_candidates": null,
-        "circulation_valid_candidates": null,
-        "door_feasible_candidates": null,
-        "space_utilization": 76.6,
+        "complete_candidates": 15,
+        "geometry_valid_candidates": 1,
+        "connectivity_valid_candidates": 1,
+        "circulation_valid_candidates": 1,
+        "door_feasible_candidates": 1,
+        "space_utilization": 69.9,
         "compactness": null,
-        "vastu_score": 0,
+        "vastu_score": 18,
         "architecture_score": 97.0,
-        "final_score": 0
+        "final_score": 18
       },
       "validation": {
         "geometry_valid": true,
@@ -1355,56 +1191,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 2.12
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 12.55
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 79.3,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 88.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 87.0,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -1425,56 +1244,39 @@
         "vastu_optimization": false
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 2.06
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 7.07
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 79.3,
         "compactness": null,
         "vastu_score": null,
-        "architecture_score": 88.0,
+        "architecture_score": 86.0,
         "final_score": null
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     },
     {
@@ -1506,7 +1308,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 7.98
+        "duration_seconds": 8.11
       },
       "metrics": {
         "complete_candidates": null,
@@ -1514,11 +1316,11 @@
         "connectivity_valid_candidates": null,
         "circulation_valid_candidates": null,
         "door_feasible_candidates": null,
-        "space_utilization": 69.0,
+        "space_utilization": 69.2,
         "compactness": null,
-        "vastu_score": 32,
+        "vastu_score": 41,
         "architecture_score": 93.8,
-        "final_score": 32
+        "final_score": 41
       },
       "validation": {
         "geometry_valid": true,
@@ -1559,7 +1361,7 @@
         "diagnosis_reason": null,
         "infeasibility_reasons": [],
         "recommended_relaxations": [],
-        "duration_seconds": 6.13
+        "duration_seconds": 5.79
       },
       "metrics": {
         "complete_candidates": null,
@@ -1601,56 +1403,39 @@
         "vastu_optimization": true
       },
       "result": {
-        "orchestration_status": "INFEASIBLE_REQUEST",
-        "failure_classification": "INFEASIBLE_REQUEST",
-        "valid": false,
-        "rendered": false,
-        "attempted_iterations": 2,
-        "retry_recommended": false,
-        "dominant_issue": "DISCONNECTED_ROOM",
-        "affected_rooms": [
-          "bathroom_1",
-          "bedroom_2",
-          "kitchen_1"
-        ],
-        "diagnosis_reason": "No valid floor plan was found under current system constraints due to persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1.",
-        "infeasibility_reasons": [
-          "Candidate space structurally exhausted across 2 generation strategies with zero complete valid candidates.",
-          "Persistent DISCONNECTED_ROOM for room(s) bathroom_1, bedroom_2, kitchen_1 under current plot and room geometry.",
-          "Zero door-feasible and circulation-valid candidate layouts could be constructed."
-        ],
-        "recommended_relaxations": [
-          "Increase plot size (width or depth) to provide additional access perimeter",
-          "Reduce the number of requested rooms",
-          "Modify or remove parking requirement to free frontage for room connectivity",
-          "Relax architectural direct-access constraints if permissible"
-        ],
-        "duration_seconds": 2.15
+        "orchestration_status": "VALID",
+        "failure_classification": "NONE",
+        "valid": true,
+        "rendered": true,
+        "attempted_iterations": 1,
+        "retry_recommended": true,
+        "dominant_issue": "SUCCESS",
+        "affected_rooms": [],
+        "diagnosis_reason": null,
+        "infeasibility_reasons": [],
+        "recommended_relaxations": [],
+        "duration_seconds": 12.61
       },
       "metrics": {
-        "complete_candidates": 0,
-        "geometry_valid_candidates": 2,
-        "connectivity_valid_candidates": 0,
-        "circulation_valid_candidates": 0,
-        "door_feasible_candidates": 0,
-        "space_utilization": 66.0,
+        "complete_candidates": null,
+        "geometry_valid_candidates": null,
+        "connectivity_valid_candidates": null,
+        "circulation_valid_candidates": null,
+        "door_feasible_candidates": null,
+        "space_utilization": 79.3,
         "compactness": null,
-        "vastu_score": null,
-        "architecture_score": 88.0,
-        "final_score": null
+        "vastu_score": 0,
+        "architecture_score": 87.0,
+        "final_score": 0
       },
       "validation": {
-        "geometry_valid": false,
-        "circulation_valid": false,
-        "final_valid": false,
-        "unreachable_rooms": [
-          "bedroom_2",
-          "kitchen_1",
-          "bathroom_1"
-        ],
+        "geometry_valid": true,
+        "circulation_valid": true,
+        "final_valid": true,
+        "unreachable_rooms": [],
         "passage_violations": [],
-        "door_infeasible": true,
-        "room_count_valid": false
+        "door_infeasible": false,
+        "room_count_valid": true
       }
     }
   ]

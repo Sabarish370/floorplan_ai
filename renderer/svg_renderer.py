@@ -45,6 +45,7 @@ def render_svg(plot_width: float, plot_depth: float, facing: str, layout, pixels
         "parking": "#eeeeee",
         "dining": "#fbe9e7",
         "utility": "#eceff1",
+        "circulation": "#f0f4c3",
     }
     
     for room in rooms:

@@ -70,7 +70,7 @@ def maximize_footprint_coverage(rooms, reqs, plot_w, plot_d, facing):
         rooms.sort(key=lambda r: type_prio(r['type']))
         
         for r in rooms:
-            if r['type'] == 'parking': continue
+            if r['type'] in ['parking', 'circulation']: continue
             
             # Try expanding Right
             new_w = r['width'] + step
@@ -186,7 +186,7 @@ def eliminate_internal_voids(rooms, plot_w, plot_d):
         # Sort rooms by how much they touch the void
         touching_rooms = []
         for r in rooms:
-            if r['type'] == 'parking': continue
+            if r['type'] in ['parking', 'circulation']: continue
             rp = box(r['x'], r['y'], r['x'] + r['width'], r['y'] + r['depth'])
             if rp.touches(vp) or rp.distance(vp) < 0.1:
                 touching_rooms.append(r)

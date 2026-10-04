@@ -137,7 +137,7 @@ def optimize_layout(reqs: FloorPlanRequirements, baseline: FloorPlan, baseline_v
                 
                 # Ensure room counts match exactly
                 req_count = sum(count for room, count in reqs.rooms.items() if room != 'parking')
-                gen_count = len([r for r in candidate.rooms if r.type != 'parking'])
+                gen_count = len([r for r in candidate.rooms if r.type not in ['parking', 'circulation']])
                 
                 # Track building_connected and door_feasible based on validation string
                 errs = " ".join(validation.get("errors", [])).lower()
@@ -370,7 +370,7 @@ def optimize_layout(reqs: FloorPlanRequirements, baseline: FloorPlan, baseline_v
         errs = " ".join(val_res.get("errors", [])).lower()
         is_connected = "connect" not in errs and "accessible" not in errs
         req_count = sum(count for room, count in reqs.rooms.items() if room != 'parking')
-        gen_count = len([r for r in layout.rooms if r.type != 'parking'])
+        gen_count = len([r for r in layout.rooms if r.type not in ['parking', 'circulation']])
         room_count_valid = req_count == gen_count
         
         geometry_valid = val_res['valid'] and is_connected and room_count_valid

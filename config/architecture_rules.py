@@ -33,6 +33,7 @@ PASSAGE_POLICY = {
     "bedroom": {"can_be_passage": False},
     "pooja": {"can_be_passage": True}, # soft penalty only
     "parking": {"can_be_passage": False},
+    "circulation": {"can_be_passage": True},
 }
 
 CIRCULATION_CONSTRAINTS = {
@@ -55,6 +56,7 @@ PASSAGE_ROOM_PENALTIES = {
     "pooja": 10,
     "hall": 0,
     "dining": 0,
+    "circulation": 0,
 }
 
 OPTIMIZATION_WEIGHTS = {
